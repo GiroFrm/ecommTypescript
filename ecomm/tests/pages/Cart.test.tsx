@@ -4,7 +4,6 @@ import { it, expect, describe, vi, beforeEach } from 'vitest';
 import Cart from '../../src/pages/cart/Cart'
 import React from 'react';
 import { ShopContext } from '../../src/context/ShopContext';
-import CartItem from '../../src/pages/cart/CartItem';
 import { Product } from '../../src/entities';
 import { useNavigate } from 'react-router-dom';
 
