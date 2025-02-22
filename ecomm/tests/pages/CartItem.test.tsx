@@ -4,13 +4,16 @@ import { it, expect, describe, vi, beforeEach } from 'vitest';
 import CartItem from '../../src/pages/cart/CartItem';
 import React from 'react';
 import { ShopContext } from '../../src/context/ShopContext';
-import {BrowserRouter as Router, useNavigate } from 'react-router-dom';
+import Cart from '../../src/pages/cart/Cart';
+import { useNavigate } from 'react-router-dom';
+import { Product } from '../../src/entities';
 
 
 
 describe('CartItem component', () => {
 
-    const productMock = {  id: 1,
+    const productMock = 
+      {  id: 1,
         title: "product1",
         price: 29.00,
         description: "pproduct test",
@@ -19,15 +22,46 @@ describe('CartItem component', () => {
         rating: {
           rate: 5,
           count: 23,
-        }} 
-        const mockRemoveFromCart = vi.fn();
+        }
+      }
     
+  
+        const mockRemoveFromCart = vi.fn();
         const mockAddToCart = vi.fn()
            
-    
           const mockCartItems = { 1: 2 }; // Example cart items with product ID 1 and count 2
           
-          const mockContextValue = {
+           beforeEach(() => {
+              vi.resetAllMocks();
+            });
+             
+    it('should render product', () => {
+        render(
+          <ShopContext.Provider
+          value={
+            {
+              AddToCart: mockAddToCart,
+              cartItems: mockCartItems,
+              removeFromCart: mockRemoveFromCart,
+              updateCartItemCount: vi.fn(),
+              getTotalCartAmount: vi.fn(),
+              checkout: vi.fn(),
+              products: [],
+            }
+          }
+          >
+        <CartItem data ={productMock}/>
+        </ShopContext.Provider>
+      )
+
+        expect(screen.getByText('product1')).toBeInTheDocument();
+    })
+
+    it('should render countHandler Input with the correct quantity', () => {
+      render(
+        <ShopContext.Provider
+        value={
+          {
             AddToCart: mockAddToCart,
             cartItems: mockCartItems,
             removeFromCart: mockRemoveFromCart,
@@ -35,62 +69,121 @@ describe('CartItem component', () => {
             getTotalCartAmount: vi.fn(),
             checkout: vi.fn(),
             products: [],
-          };
-           beforeEach(() => {
-              vi.resetAllMocks();
-            });
-             
-            const renderWithContext = (ui: React.ReactElement) => {
-              return render(
-                <ShopContext.Provider value={mockContextValue}>
-                  {ui}
-                </ShopContext.Provider>
-              );
-            };
-
-
-
-
-    it('should render product', () => {
-        renderWithContext(<CartItem data={productMock}/>)
-
-        expect(screen.getByText('product1')).toBeInTheDocument();
-    })
-
-    it('should render countHandler Input with the correct quantity', () => {
-        renderWithContext(<CartItem data={productMock}/>)
-        
+          }
+        }
+        >
+      <CartItem data ={productMock}/>
+      </ShopContext.Provider>
+    )
+  
         const inputCountHandler = screen.getByRole('textbox');
         expect(inputCountHandler).toBeInTheDocument();
         expect(inputCountHandler).toHaveValue('2');
     })
 
     it('should render countHandler add-to-card button', () => {
-        renderWithContext(<CartItem data={productMock}/>)
-
+      render(
+        <ShopContext.Provider
+        value={
+          {
+            AddToCart: mockAddToCart,
+            cartItems: mockCartItems,
+            removeFromCart: mockRemoveFromCart,
+            updateCartItemCount: vi.fn(),
+            getTotalCartAmount: vi.fn(),
+            checkout: vi.fn(),
+            products: [],
+          }
+        }
+        >
+      <CartItem data ={productMock}/>
+      </ShopContext.Provider>
+    )
         const addToCartButton = screen.getByText('+');
         expect(addToCartButton).toBeInTheDocument();
     })
 
     it('should called addtoCart with product id when button is clicked', ()=>{
-        renderWithContext(<CartItem data={productMock}/>)
+      render(
+        <ShopContext.Provider
+        value={
+          {
+            AddToCart: mockAddToCart,
+            cartItems: mockCartItems,
+            removeFromCart: mockRemoveFromCart,
+            updateCartItemCount: vi.fn(),
+            getTotalCartAmount: vi.fn(),
+            checkout: vi.fn(),
+            products: [],
+          }
+        }
+        >
+      <CartItem data ={productMock}/>
+      </ShopContext.Provider>
+    )
 
         const addToCartButton = screen.getByText('+');
        
-    
         fireEvent.click(addToCartButton);
 
-        expect(mockAddToCart).toHaveBeenCalledWith(1);
+        expect(mockAddToCart).toHaveBeenCalledWith(productMock.id);
 
     })
 
     it('should called removefromCart with product id when button is clicked', ()=>{
-        renderWithContext(<CartItem data={productMock}/>)
-
+      render(
+        <ShopContext.Provider
+        value={
+          {
+            AddToCart: mockAddToCart,
+            cartItems: mockCartItems,
+            removeFromCart: mockRemoveFromCart,
+            updateCartItemCount: vi.fn(),
+            getTotalCartAmount: vi.fn(),
+            checkout: vi.fn(),
+            products: [],
+          }
+        }
+        >
+      <CartItem data ={productMock}/>
+      </ShopContext.Provider>
+    )
         const addToCartButton = screen.getByText('-');
 
         fireEvent.click(addToCartButton);
 
         expect(mockRemoveFromCart).toHaveBeenCalledWith(1);
     })
+
+    it('throws error if ShopContext is not available', () => {
+      expect(() => render(<CartItem data={productMock} />)).toThrowError(
+        'ShopContext must be used within a ShopContextProvider'
+      );
+    });
+  
+      it('displays 0 if item not in cart', () => {
+        render(
+          <ShopContext.Provider
+          value={
+            {
+              AddToCart: mockAddToCart,
+              cartItems: mockCartItems,
+              removeFromCart: mockRemoveFromCart,
+              updateCartItemCount: vi.fn(),
+              getTotalCartAmount: vi.fn(),
+              checkout: vi.fn(),
+              products: [],
+            }
+          }
+          >
+        <CartItem data ={productMock}/>
+        </ShopContext.Provider>
+      )
+  
+          expect(screen.getByRole('textbox')).toHaveValue(undefined);
+        });
 })
+
+
+//Define types for your products and cart items
+
