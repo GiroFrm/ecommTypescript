@@ -8,7 +8,20 @@ import { Product } from '../../src/entities';
 import { useNavigate } from 'react-router-dom';
 
 
-const mockProducts = [{  id: 1,
+const createMockShopContext = (overrides = {}) => ({
+    cartItems: {},
+            products: mockProducts,
+            getTotalCartAmount: () => 0,
+            checkout: vi.fn(),
+            AddToCart: vi.fn(),
+            removeFromCart: vi.fn(),
+            updateCartItemCount: vi.fn(),
+            getTotalCartItems: vi.fn(),
+            ...overrides,
+})
+
+const mockProducts = [{  
+        id: 1,
         title: "product1",
         price: 29.00,
         description: "pproduct test",
@@ -32,7 +45,6 @@ const mockProducts = [{  id: 1,
           }]
   
 
-  
   vi.mock('react-router-dom', () => {
     const mockNavigate = vi.fn();
     return {
@@ -53,16 +65,7 @@ const mockProducts = [{  id: 1,
     it('renders empty cart message when cart is empty', () => {
       render(
         <ShopContext.Provider
-          value={{
-            cartItems: {},
-            products: mockProducts,
-            getTotalCartAmount: () => 0,
-            checkout: vi.fn(),
-            AddToCart: vi.fn(),
-            removeFromCart: vi.fn(),
-            updateCartItemCount: vi.fn()
-          }}
-        >
+          value={createMockShopContext()}>
           <Cart />
         </ShopContext.Provider>
       );
@@ -74,15 +77,13 @@ const mockProducts = [{  id: 1,
       const mockCartItems = { 1: 1, 2: 2 }; // Type the mockCartItems
       render(
         <ShopContext.Provider
-          value={{
+          value={
+            createMockShopContext({
             cartItems: mockCartItems,
             products: mockProducts,
             getTotalCartAmount: () => 50,
-            checkout: vi.fn(),
-            AddToCart: vi.fn(),
-            removeFromCart: vi.fn(),
-            updateCartItemCount: vi.fn()
-          }}
+          })
+        }
         >
           <Cart />
         </ShopContext.Provider>
@@ -96,15 +97,13 @@ const mockProducts = [{  id: 1,
         const mockCartItems = { 1: 1, 2: 2 };
       render(
         <ShopContext.Provider
-          value={{
-            cartItems: mockCartItems,
-            products: mockProducts,
-            getTotalCartAmount: () => 50,
-            checkout: vi.fn(),
-            AddToCart: vi.fn(),
-            removeFromCart: vi.fn(),
-            updateCartItemCount: vi.fn()
-          }}
+          value={
+            createMockShopContext({
+                cartItems: mockCartItems,
+                products: mockProducts,
+                getTotalCartAmount: () => 50,
+              })
+        }
         >
           <Cart />
         </ShopContext.Provider>
@@ -116,15 +115,13 @@ const mockProducts = [{  id: 1,
         const mockCartItems = { 1: 1, 2: 2 };
       render(
         <ShopContext.Provider
-          value={{
+          value={
+            createMockShopContext({
             cartItems: mockCartItems,
             products: mockProducts,
             getTotalCartAmount: () => 50,
-            checkout: vi.fn(),
-            AddToCart: vi.fn(),
-            removeFromCart: vi.fn(),
-            updateCartItemCount: vi.fn()
-          }}
+          })
+        }
         >
           <Cart />
         </ShopContext.Provider>
@@ -141,15 +138,14 @@ const mockProducts = [{  id: 1,
   
       render(
         <ShopContext.Provider
-          value={{
+          value={
+            createMockShopContext( {
             cartItems: mockCartItems,
             products: mockProducts,
             getTotalCartAmount: () => 50,
             checkout: mockCheckout,
-            AddToCart: vi.fn(),
-            removeFromCart: vi.fn(),
-            updateCartItemCount: vi.fn()
-          }}
+          })
+        }
         >
           <Cart />
         </ShopContext.Provider>
