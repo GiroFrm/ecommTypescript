@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { ShopContext } from '../../context/ShopContext';
 import { Product } from '../../entities';
 
-export const CartItem = ({data}:{data: Product}) => {
+ const CartItem = ({data}:{data: Product}) => {
 
     const {id, title, price, image } = data;
 
@@ -15,24 +15,27 @@ export const CartItem = ({data}:{data: Product}) => {
 
     const {cartItems, AddToCart, removeFromCart} = context;
 
+    let priceTotal = cartItems[id] * price;
+
     return (
     <div className='cartItem'>
-     {" "}
        <img src={image} alt="" /> 
        <div className='description'>
         <p>
-            {" "}
             <b>{title}</b>
         </p>
-        <p>${price}</p>
+        <p>${priceTotal}</p>
         <div className="countHandler">
-          <button onClick={() => removeFromCart(id)}> - </button>
+          <div className="btn-remove" onClick={() => removeFromCart(id)}> - </div>
           <input
             value={cartItems[id]}
           />
-          <button onClick={() => AddToCart(id)}> + </button>
+          <div className="btn-add" onClick={() => AddToCart(id)}> + </div>
         </div>
     </div>
     </div>
   )
 }
+
+
+export default CartItem;
