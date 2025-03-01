@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { ShopContext } from '../../context/ShopContext'
-import { CartItem } from './CartItem'
+import CartItem  from './CartItem'
 import { useNavigate } from 'react-router-dom';
 import "./cart.css";
 
@@ -12,24 +12,39 @@ import "./cart.css";
     throw new Error('ShopContext must be used within a ShopContextProvider');
    }
 
-  const{cartItems, products, getTotalCartAmount, checkout} = context;
+  const{cartItems, products, getTotalCartAmount, getTotalCartItems, checkout} = context;
 
   const totalAmount = getTotalCartAmount();
+
+  const totalItems =getTotalCartItems();
 
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className='cart'>
+     <div className='products-container'>
      {products.map((product)=>{
        if(cartItems[product.id]){
         return <CartItem key={product.id} data={product}/>
        }
       })}
+     </div>
 
     {totalAmount > 0 ? (
-        <div className="checkout">
-          <p> Subtotal: ${totalAmount} </p>
-          <button onClick={() => navigate("/")}> Continue Shopping </button>
+        <div className="checkout" >
+          <div className='summary-order flex-group'>
+          <p>{totalItems} items</p>
+          <p>${totalAmount}</p>
+          </div>
+          <div className='flex-group subtotal'  role="region" aria-label="Subtotal">
+          <p>Subtotal</p>
+          <p>${totalAmount} </p>
+          </div>
+          <div className='flex-group'>
+          <p>Estimate delivery</p>
+          <p>FREE</p>
+          </div>
+         
           <button
             onClick={() => {
               checkout();
@@ -39,9 +54,13 @@ import "./cart.css";
             {" "}
             Checkout{" "}
           </button>
+          <button onClick={() => navigate("/")}>Continue Shopping</button>
         </div>
       ) : (
+        <div style={{textAlign:'center', width: '100%'}}>
         <h1> Your Shopping Cart is Empty</h1>
+        <button onClick={() => navigate("/")}>Continue Shopping</button>
+        </div>
       )}
       </div>
   )
