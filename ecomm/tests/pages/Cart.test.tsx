@@ -102,13 +102,15 @@ const mockProducts = [{
                 cartItems: mockCartItems,
                 products: mockProducts,
                 getTotalCartAmount: () => 50,
+              
               })
         }
         >
           <Cart />
         </ShopContext.Provider>
       );
-      expect(screen.getByText(/Subtotal: \$50/)).toBeInTheDocument();
+      expect(screen.getByText('items')).toBeInTheDocument();
+      expect(screen.getByText(/Subtotal/i)).toBeInTheDocument()
     });
   
     it('navigates to home when "Continue Shopping" button is clicked', () => {

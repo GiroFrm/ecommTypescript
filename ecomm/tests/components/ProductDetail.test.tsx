@@ -1,9 +1,9 @@
 import { it, expect, describe, vi, beforeEach } from 'vitest';
-import Product from '../../src/components/ProductDetail';
+import Product from '../../src/pages/shop/ProductDetail';
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { ShopContext, ShopContextProvider } from '../../src/context/ShopContext';
-import ProductDetail from '../../src/components/ProductDetail';
+import ProductDetail from '../../src/pages/shop/ProductDetail';
 
 describe('ProductDetail', () => {
   const mockAddToCart = vi.fn();
@@ -15,6 +15,7 @@ describe('ProductDetail', () => {
     removeFromCart: vi.fn(),
     updateCartItemCount: vi.fn(),
     getTotalCartAmount: vi.fn(),
+    getTotalCartItems:vi.fn(),
     checkout: vi.fn(),
     products: [],
   };
