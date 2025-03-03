@@ -27,13 +27,16 @@ export const useData = (): UseDataResult => {
       setError(null);
      try{
       const  data  = await fetchProduct();
-      setProducts(data);
+      setTimeout(()=>{
+        setProducts(data);
+        setLoading(false);
+      }, 2000)
+     
     }catch(error) {
       const axiosError = error as AxiosError;
       setError(axiosError.message);
-    }finally {
-      setLoading(false);
     }
+    
 }
     fetchData();
   }, []);
