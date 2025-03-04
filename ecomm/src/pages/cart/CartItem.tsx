@@ -2,6 +2,7 @@ import React from 'react'
 import { useContext } from 'react';
 import { ShopContext } from '../../context/ShopContext';
 import { Product } from '../../entities';
+import styles from './cart.module.css';
 
  const CartItem = ({data}:{data: Product}) => {
 
@@ -18,19 +19,21 @@ import { Product } from '../../entities';
     let priceTotal = cartItems[id] * price;
 
     return (
-    <div className='cartItem'>
+    <div className={styles.cartItem}>
+      <div>
        <img src={image} alt="" /> 
-       <div className='description'>
+       </div>
+       <div className={styles.description}>
         <p>
             <b>{title}</b>
         </p>
         <p>${priceTotal}</p>
-        <div className="countHandler">
-          <div className="btn-remove" onClick={() => removeFromCart(id)}> - </div>
+        <div className={styles.countHandler}>
+          <div className={styles.btnRemove} onClick={() => removeFromCart(id)}> - </div>
           <input
             value={cartItems[id]}
           />
-          <div className="btn-add" onClick={() => AddToCart(id)}> + </div>
+          <div className={styles.btnAdd} onClick={() => AddToCart(id)}> + </div>
         </div>
     </div>
     </div>

@@ -1,7 +1,7 @@
 import React,{useContext} from 'react'
 import { Product } from '../../entities';
 import { ShopContext } from '../../context/ShopContext';
-import './Shop.css'
+import styles from './Shop.module.css'
 
 const ProductDetail = ({data}:{data:Product}) => {
 
@@ -18,18 +18,20 @@ const ProductDetail = ({data}:{data:Product}) => {
   const cartItemsCount = cartItems[id];
 
   return (
-    <div className='product'>
+    <div className={styles.product}>
+      <div className={styles.imgContainer}>
         <img src={image} alt="" />
-        <div className='description'>
+        </div>
+        <div className={styles.description}>
             <p>
                 {" "}
-                <b>{title}</b>
+                {title}
             </p>
-            <p>${price}</p>
+            <p className={styles.price}>${price}</p> 
         </div>
-        <button className='addToCartBttn' onClick={()=>AddToCart(id)}>AddToCart {cartItemsCount}</button>
+        <button className={styles.addToCartBttn} onClick={()=>AddToCart(id)}>AddToCart {cartItemsCount}</button>
         
-        </div>
+      </div>
   )
 }
 

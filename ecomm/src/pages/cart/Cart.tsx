@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { ShopContext } from '../../context/ShopContext'
 import CartItem  from './CartItem'
 import { useNavigate } from 'react-router-dom';
-import "./cart.css";
+import styles from "./cart.module.css";
 
  const Cart = () => {
 
@@ -21,8 +21,8 @@ import "./cart.css";
   const navigate = useNavigate();
 
   return (
-    <div className='cart'>
-     <div className='products-container'>
+    <div className={styles.cart}>
+     <div className={styles.productsContainer}>
      {products.map((product)=>{
        if(cartItems[product.id]){
         return <CartItem key={product.id} data={product}/>
@@ -31,16 +31,16 @@ import "./cart.css";
      </div>
 
     {totalAmount > 0 ? (
-        <div className="checkout" >
-          <div className='summary-order flex-group'>
+        <div className={styles.checkout} >
+          <div className={styles.flexGroup}>
           <p>{totalItems} items</p>
           <p>${totalAmount}</p>
           </div>
-          <div className='flex-group subtotal'  role="region" aria-label="Subtotal">
+          <div className={styles.flexGroup}  role="region" aria-label="Subtotal">
           <p>Subtotal</p>
           <p>${totalAmount} </p>
           </div>
-          <div className='flex-group'>
+          <div className={styles.flexGroup}>
           <p>Estimate delivery</p>
           <p>FREE</p>
           </div>
@@ -48,7 +48,7 @@ import "./cart.css";
           <button
             onClick={() => {
               checkout();
-              navigate("/checkout");
+              navigate("/");
             }}
           >
             {" "}
