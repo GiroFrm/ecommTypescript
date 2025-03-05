@@ -19,7 +19,7 @@ const Navbar = () => {
     <div className={styles.navbar}>
       <div className={styles.links}>
       <Link to="/">Shop</Link>
-       <Link to="/cart"><div><p className='cart-icon'><SlBasket/><span >{totalItems}</span></p></div></Link>
+       <Link to="/cart"><div className={styles.cartIcon}><SlBasket size={35}/>{totalItems}</div></Link>
        </div>
     </div>
   )
