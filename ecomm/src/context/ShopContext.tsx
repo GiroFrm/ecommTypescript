@@ -1,6 +1,7 @@
 import {createContext, useState, ReactNode} from 'react';
 import { useData } from '../hooks/useData';
 import { Product } from '../entities';
+import { approxPrice } from '../utils';
 
 type ShopContextProps = {
     children: ReactNode;
@@ -16,6 +17,7 @@ type ShopContextType = {
     removeFromCart: (itemId: number) => void;
     updateCartItemCount: (value: number, itemId: number)=>void;
     getTotalCartAmount: ()=>number;
+    getTotalCartItems:()=>number;
     checkout:()=>void;
     products: Product[]; // Replace 'any' with the actual type of 'Product' if known
   }
@@ -59,8 +61,20 @@ export const ShopContextProvider: React.FC<ShopContextProps | null> = (props: an
               }
           }
         }
-        return totalAmount;
+         //approx total to 2 decimal number
+        let approxtotal = approxPrice(totalAmount);
+        return approxtotal;
       };
+
+      const getTotalCartItems = ()=>{
+        let total = 0;
+        for (const item of Object.values(cartItems)) {
+          const qnty = Number(item); 
+                total += qnty; 
+      }
+     
+      return total;
+    }
 
      const  updateCartItemCount = (value: number, itemId: number)=>{
         setCartItems((prevItem)=>({...prevItem, [itemId]: value })    
@@ -70,7 +84,7 @@ export const ShopContextProvider: React.FC<ShopContextProps | null> = (props: an
         setCartItems({});
       };
 
-      const contextValue = {cartItems, AddToCart, removeFromCart, getTotalCartAmount, updateCartItemCount, products,checkout }  
+      const contextValue = {cartItems, AddToCart, removeFromCart, getTotalCartAmount, updateCartItemCount, products,checkout, getTotalCartItems }  
       return <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>
 }
       
