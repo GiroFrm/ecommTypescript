@@ -1,5 +1,8 @@
 import React, { useRef } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
+import styles from './SignUp.module.css'
+import CustomInput from '../../components/input/CustomInput';
+import { CustomButton } from '../../components/Button/CustomButton';
 
 const SignUp = () => {
 
@@ -18,8 +21,9 @@ const SignUp = () => {
                  headers: {'Content-Type': 'application/json'},
                  body: JSON.stringify({
                  email: emailRef.current.value,
-                 password: emailRef.current.value,
-                 name:emailRef.current.value
+                 name:nameRef.current.value,
+                 password: passwordRef.current.value,
+             
               })
              
              })
@@ -33,33 +37,36 @@ const SignUp = () => {
 
 
   return (
-    <div>
-  <form onSubmit={handleReg} style={{display:'grid', placeContent:'center'}}>
-            <input 
-             type="text" 
-             name="email"
-             placeholder="email"
-             ref={emailRef}
+    <div className={styles.main}>
+    <form className={styles.form} onSubmit={handleReg}>
+            <CustomInput 
+            type={'text'} 
+            name={'email'} 
+            placeHolder={'email'}
+            inputRef={emailRef}
+            required/>
+             <CustomInput  
+             type={'text'}
+             name={'name'}
+             placeHolder={'name'}
+             inputRef={nameRef}
              required
             />
-             <input 
-             type="text" 
-             name="name"
-             placeholder="name"
-             ref={nameRef}
-             required
-            />
-             <input 
+             <CustomInput 
              type="password" 
              name="password"
-             placeholder="password"
-             ref={passwordRef}
+             placeHolder="password"
+             inputRef={passwordRef}
              required
             />
-           <input type="submit" value="Sign Up"/>
+           <CustomButton disable={false} type={'submit'} title={'Sign Up'}/>
+           <div className={styles.link}>
+           Already have an account?
            <Link to="/login">
             Log in
            </Link>
+           </div>
+          
            </form>
        
     </div>
