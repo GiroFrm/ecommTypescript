@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import "@testing-library/jest-dom/vitest"
 import { it, expect, describe, vi, beforeEach } from 'vitest';
-import Shop from '../../src/pages/shop/Shop.tsx';
+import Shop from '../../src/components/shop/shop.tsx';
 import { ShopContextProvider } from '../../src/context/ShopContext.tsx';
 import {useData} from '../../src/hooks/useData.tsx'
 import React from 'react';
@@ -27,6 +27,7 @@ describe('Shop Component', () => {
         </ShopContextProvider>
       
       );
+      const div = screen.getByRole('heading')
         expect(screen.getByText('Product 1')).toBeInTheDocument();
         expect(screen.getByText('Product 2')).toBeInTheDocument();
       });

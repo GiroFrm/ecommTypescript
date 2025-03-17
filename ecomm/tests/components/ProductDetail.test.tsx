@@ -1,9 +1,9 @@
 import { it, expect, describe, vi, beforeEach } from 'vitest';
-import Product from '../../src/pages/shop/ProductDetail';
+
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { ShopContext, ShopContextProvider } from '../../src/context/ShopContext';
-import ProductDetail from '../../src/pages/shop/ProductDetail';
+import ProductDetail  from '../../src/components/shop/ProductDetail';
 
 describe('ProductDetail', () => {
   const mockAddToCart = vi.fn();
@@ -18,6 +18,8 @@ describe('ProductDetail', () => {
     getTotalCartItems:vi.fn(),
     checkout: vi.fn(),
     products: [],
+    setLogin: vi.fn(),
+    isLoged: false
   };
 
   const product = {  id: 1,
@@ -44,7 +46,7 @@ describe('ProductDetail', () => {
   };
   
     it('should render a product details', () => {
-     renderWithContext(<Product data={product}/>)
+     renderWithContext(<ProductDetail data={product}/>)
 
     expect(screen.getByText('product1')).toBeInTheDocument();
     expect(screen.getByText('$29')).toBeInTheDocument();
@@ -52,14 +54,14 @@ describe('ProductDetail', () => {
     })
 
     it('renders add to cart button with correct count', ()=>{
-        renderWithContext(<Product data={product}/>)
+        renderWithContext(<ProductDetail data={product}/>)
 
          const addTocartButton = screen.getByText('AddToCart 2')
          expect(addTocartButton).toBeInTheDocument();
         })
 
     it('calls Addtocart with product id when button is clicked', ()=>{
-        renderWithContext(<Product data={product}/>)
+        renderWithContext(<ProductDetail data={product}/>)
 
         const addTocartButton = screen.getByText('AddToCart 2');
         fireEvent.click(addTocartButton);

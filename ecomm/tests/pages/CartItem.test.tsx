@@ -1,12 +1,13 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import "@testing-library/jest-dom/vitest"
 import { it, expect, describe, vi, beforeEach } from 'vitest';
-import CartItem from '../../src/pages/cart/CartItem';
+
 import React from 'react';
 import { ShopContext } from '../../src/context/ShopContext';
-import Cart from '../../src/pages/cart/Cart';
+
 import { useNavigate } from 'react-router-dom';
 import { Product } from '../../src/entities';
+import CartItem from '../../src/components/Cart/CartItem';
 
 
 
@@ -21,6 +22,8 @@ describe('CartItem component', () => {
     removeFromCart: mockRemoveFromCart,
     updateCartItemCount: vi.fn(),
     getTotalCartItems: vi.fn(),
+    setLogin: vi.fn(),
+    isLoged: false,
     ...overrides,
   })
   const mockProducts = [{
