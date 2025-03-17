@@ -2,11 +2,14 @@
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import './App.css'
 import './reset.css';
-import Navbar from "./components/Navbar";
-import Shop from "./pages/shop/Shop";
-import Cart from "./pages/cart/Cart";
-import Login from "./pages/login/login";
+import Navbar from "./components/Navbar/Navbar";
+import Shop from "./components/Shop/Shop";
 import { ShopContextProvider } from "./context/ShopContext";
+import SignUp from "./components/SignUp/SignUp";
+import { CartPage } from "./pages/CartPage";
+
+import { ShopPage } from "./pages/ShopPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
  
@@ -17,9 +20,10 @@ function App() {
        <Router>
          <Navbar/>
           <Routes>
-            <Route path="/" element={<Shop/>}/>
-            <Route path="/cart" element={<Cart/>}/>
-            <Route path="/login" element={<Login/>}/>
+            <Route path="/" element={<ShopPage/>}/>
+            <Route path="/cart" element={<CartPage/>}/>
+            <Route path="/login" element={<LoginPage/>}/>
+            <Route path="/signup" element={<SignUp/>}/>
           </Routes>
         </Router> 
         </ShopContextProvider>
