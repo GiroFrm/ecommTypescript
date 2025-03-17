@@ -38,13 +38,13 @@ const db = knex({
        app.use(cors());
        
      
-       app.get('/', (req, res)=>{
-         res.send(database.users)
-       })
+      //  app.get('/', (req, res)=>{
+      //    res.send(database.users)
+      //  })
        
        app.post('/signin', (req, res)=>{handleSignIn(req, res, db, bcrypt)});
 
-       app.post('/register', (req, res)=> {handleRegister(req, res, db, bcrypt)});
+       app.post('/register', (req, res)=> {handleRegister(req, res, db, bcrypt, saltRounds)});
 
        app.get('/profile/:id', (req,res)=>{handleProfile(req, res, db)});
 
