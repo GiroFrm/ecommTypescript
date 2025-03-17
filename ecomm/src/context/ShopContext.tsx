@@ -1,4 +1,4 @@
-import {createContext, useState, ReactNode} from 'react';
+import {createContext, useState, useMemo, useCallback,ReactNode} from 'react';
 import { useData } from '../hooks/useData';
 import { Product } from '../entities';
 import { approxPrice } from '../utils';
@@ -19,8 +19,10 @@ type ShopContextType = {
     getTotalCartAmount: ()=>number;
     getTotalCartItems:()=>number;
     checkout:()=>void;
-    products: Product[]; // Replace 'any' with the actual type of 'Product' if known
-  }
+    products: Product[]; 
+    setLogin: ()=> void;
+    isLoged:  boolean;
+}
 
 export const ShopContext = createContext<ShopContextType | null>(null)
 
@@ -30,7 +32,13 @@ export const ShopContextProvider: React.FC<ShopContextProps | null> = (props: an
     
       const[cartItems, setCartItems] = useState<CartItems>({ });
 
-      const AddToCart = (itemId: number) =>{ 
+      const [isLoged, setIsLoged] = useState<boolean>(false);
+
+      const setLogin = ()=>{
+        setIsLoged((prevIsLogged) => !prevIsLogged);
+      }
+
+      const AddToCart = useCallback((itemId: number) =>{ 
         //if userId exist acces and increase
           setCartItems((prevItem)=>{
             if(prevItem[itemId]){
@@ -39,7 +47,8 @@ export const ShopContextProvider: React.FC<ShopContextProps | null> = (props: an
              return {...prevItem, [itemId]: 1}
             }
       })
-      }
+      },[])
+      
       const removeFromCart = (itemId: number) => {
         setCartItems((prevItem)=>{
           if(prevItem[itemId]) {
@@ -51,7 +60,8 @@ export const ShopContextProvider: React.FC<ShopContextProps | null> = (props: an
         })
       }
 
-      const getTotalCartAmount = () => {
+      const getTotalCartAmount = useCallback(() => {
+        
         let totalAmount = 0;
         for (const item in cartItems) {
           if (cartItems[item] > 0) {
@@ -64,27 +74,40 @@ export const ShopContextProvider: React.FC<ShopContextProps | null> = (props: an
          //approx total to 2 decimal number
         let approxtotal = approxPrice(totalAmount);
         return approxtotal;
-      };
+    
+      },[cartItems]);
 
-      const getTotalCartItems = ()=>{
+      const getTotalCartItems = useCallback(()=>{
         let total = 0;
         for (const item of Object.values(cartItems)) {
           const qnty = Number(item); 
                 total += qnty; 
       }
-     
       return total;
-    }
+    },[cartItems])
 
-     const  updateCartItemCount = (value: number, itemId: number)=>{
-        setCartItems((prevItem)=>({...prevItem, [itemId]: value })    
-     )}
+     const  updateCartItemCount = useCallback((value: number, itemId: number)=>{
+        setCartItems((prevItem)=>({...prevItem, [itemId]: value })  
+     )}, [])
 
      const checkout = () => {
         setCartItems({});
       };
 
-      const contextValue = {cartItems, AddToCart, removeFromCart, getTotalCartAmount, updateCartItemCount, products,checkout, getTotalCartItems }  
+      const contextValue = {
+        cartItems, 
+        AddToCart, 
+        removeFromCart, 
+        getTotalCartAmount, 
+        updateCartItemCount,
+        products,
+        checkout,
+        getTotalCartItems,
+        setLogin,
+        isLoged 
+      }  
       return <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>
 }
+
+
       
