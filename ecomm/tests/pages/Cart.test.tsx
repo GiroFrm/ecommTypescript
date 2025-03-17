@@ -1,11 +1,11 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import "@testing-library/jest-dom/vitest"
 import { it, expect, describe, vi, beforeEach } from 'vitest';
-import Cart from '../../src/pages/cart/Cart'
+import Cart from '../../src/components/Cart/Cart.tsx'
 import React from 'react';
 import { ShopContext } from '../../src/context/ShopContext';
 import { Product } from '../../src/entities';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 const createMockShopContext = (overrides = {}) => ({
@@ -17,6 +17,8 @@ const createMockShopContext = (overrides = {}) => ({
             removeFromCart: vi.fn(),
             updateCartItemCount: vi.fn(),
             getTotalCartItems: vi.fn(),
+            setLogin:vi.fn(),
+            isLoged: false,
             ...overrides,
 })
 
@@ -52,7 +54,7 @@ const mockProducts = [{
     };
   });
   
-  vi.mock('../../src/pages/cart/CartItem', () => {
+  vi.mock('../../src/components/Cart/CartItem', () => {
     return {
       default: ({ data }: { data: Product }) => ( // Type the data prop
         <div data-testid={`cart-item-${data.id}`}>{data.title} - ${data.price}</div>
@@ -64,8 +66,7 @@ const mockProducts = [{
    
     it('renders empty cart message when cart is empty', () => {
       render(
-        <ShopContext.Provider
-          value={createMockShopContext()}>
+        <ShopContext.Provider value={createMockShopContext()}>
           <Cart />
         </ShopContext.Provider>
       );
@@ -156,7 +157,7 @@ const mockProducts = [{
       fireEvent.click(screen.getByText('Checkout'));
   
       expect(mockCheckout).toHaveBeenCalledTimes(1);
-      expect(useNavigate()).toHaveBeenCalledWith('/checkout');
+      expect(useNavigate()).toHaveBeenCalledWith('/');
     });
   
     it('throws error if ShopContext is not available', () => {
