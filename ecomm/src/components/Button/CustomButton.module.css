@@ -1,0 +1,27 @@
+.btn {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1rem;
+    background-color: rgb(19, 19, 19);
+    color: white;
+    min-width: 100px;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    border:none;
+    transition: all 0.3s ease; /* Smooth transition */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+ 
+}
+
+.btn:hover {
+    background-color: #45a049;
+    color: rgb(19, 19, 19);
+    cursor: pointer;
+    transform: translateY(-2px); /* Move up slightly */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25); /* More prominent shadow */
+  }
+ 
+.btn:active {
+  transform: translateY(0); /* Back to original position */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Original shadow */
+}

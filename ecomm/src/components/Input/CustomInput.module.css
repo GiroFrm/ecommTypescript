@@ -1,0 +1,23 @@
+.inp{
+    max-width: 300px;
+    width: 100%;
+    overflow: hidden;
+    border: none;
+    border: 1px solid #f4f6f8;
+    padding: 0.4em 3.5em 0.35em 0.3em;
+    font-size: 1rem;
+    border-radius: 7px;
+    background: #f4f6f8;
+    color: #000;
+    transition: all 0.15s ease;
+}
+
+.inp:hover {
+    background: rgba(0, 0, 0, 0.05);
+    outline: none;
+    border: 1px solid #000;
+  }
+
+  .inp:focus {
+    outline: none;
+  }
