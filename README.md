@@ -35,3 +35,6 @@ Deployed on **Vercell** for fast and reliable hosting.
 
 ## Home
 ![Homepage Screenshot](public/Home.png)
+
+## Home
+![Homepage Screenshot](public/Cart.png)
