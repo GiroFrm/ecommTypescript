@@ -32,4 +32,4 @@ Ecommerce is hosted on **Vercell**. You can access it [here](https://ecomm-types
 Deployed on **Vercell** for fast and reliable hosting.
 
 #Pages#
-![Homepage Screenshot](assets/Home.png)
+![Homepage Screenshot](public/Home.png)
