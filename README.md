@@ -22,7 +22,7 @@ Ecommerce is hosted on **Vercell**. You can access it [here](https://ecomm-types
 - **React**: For building the user interface with reusable components.
 - **JavaScript**: The core language for the application logic.
 - **HTML & CSS**: For structuring and styling the application.
-- **ContexAPI**: For Navigation and passing data through components.
+- **Router**: For pages navigation .
 - **Vitest**: For unit testing.
 - **React Testin Library**: For integration test and e2e test.
   
