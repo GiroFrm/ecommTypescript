@@ -3,7 +3,7 @@ import { ShopContext } from "../../context/ShopContext";
 import CartItem from "./CartItem.tsx";
 import { useNavigate } from "react-router-dom";
 import styles from "./cart.module.css";
-import Login from "../Login/Login";
+
 
 const Cart = () => {
   const context = useContext(ShopContext);
@@ -18,7 +18,7 @@ const Cart = () => {
     getTotalCartAmount,
     getTotalCartItems,
     checkout,
-    isLoged
+    
   } = context;
 
   const totalAmount = getTotalCartAmount();

@@ -1,4 +1,4 @@
-import React,{useContext} from 'react'
+import {useContext} from 'react'
 import { Product } from '../../entities';
 import { ShopContext } from '../../context/ShopContext';
 import styles from './Shop.module.css'

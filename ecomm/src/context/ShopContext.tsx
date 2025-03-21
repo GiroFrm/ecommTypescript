@@ -1,4 +1,4 @@
-import {createContext, useState, useMemo, useCallback,ReactNode} from 'react';
+import {createContext, useState, useCallback,ReactNode} from 'react';
 import { useData } from '../hooks/useData';
 import { Product } from '../entities';
 import { approxPrice } from '../utils';

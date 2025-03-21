@@ -1,4 +1,3 @@
-import React from 'react'
 
 const Greet = ({name}:{name: string}) => {
   if(name) return <h1>Hello {name}</h1>

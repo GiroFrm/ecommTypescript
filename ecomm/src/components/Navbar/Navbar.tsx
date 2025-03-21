@@ -1,7 +1,7 @@
 
 import { Link } from 'react-router-dom'
 import  styles from  './Navbar.module.css';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { ShopContext } from '../../context/ShopContext';
 import { SlBasket } from "react-icons/sl";
 
@@ -17,11 +17,12 @@ const Navbar = () => {
 
     const totalItems = getTotalCartItems();
 
-    const isLogOut = ()=>{
-      if(isLoged) {
-        setLogin()
-      }
-    }
+    // const isLogOut = ()=>{
+    //   if(isLoged) {
+    //     setLogin()
+    //   }
+    // }
+
   return (
     <div className={styles.navbar}>
       <div className={styles.links}>
