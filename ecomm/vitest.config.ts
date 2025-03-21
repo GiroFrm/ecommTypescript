@@ -10,5 +10,6 @@ export default defineConfig({
             reporter: ['text', 'lcov'], // Outputs coverage report in console and an HTML report
             exclude: ['node_modules/', 'test/'], // Exclude certain files or directories
           }, 
+         
     }
 })
