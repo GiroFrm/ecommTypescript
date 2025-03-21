@@ -13,7 +13,7 @@ const Navbar = () => {
     if(!context ) {
       throw new Error('ShopContext must be used within a ShopContextProvider');
      }
-     const { getTotalCartItems, isLoged, setLogin } = context;
+     const { getTotalCartItems } = context;
 
     const totalItems = getTotalCartItems();
 
