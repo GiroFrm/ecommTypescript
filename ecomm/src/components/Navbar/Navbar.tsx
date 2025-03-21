@@ -27,9 +27,9 @@ const Navbar = () => {
       <div className={styles.links}>
       <Link to="/">Shop</Link>
        <Link to="/cart"><div className={styles.cartIcon}><SlBasket size={35}/>{totalItems}</div></Link>
-           <Link to="/login" onClick={isLogOut}>
+           {/* <Link to="/login" onClick={isLogOut}>
                    {isLoged ? <p>Log Out</p>:<p>Log In</p>}
-                   </Link>
+                   </Link> */}
        </div>
     </div>
   )
