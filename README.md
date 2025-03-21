@@ -1,50 +1,32 @@
-# React + TypeScript + Vite
+# Ecommerce
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a SPA (Single Page Application) for a mock store selling Clothing and jewelry, built with React and Vite.
 
-Currently, two official plugins are available:
+## How to Access Accessory Avenue
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Ecommerce is hosted on **Vercell**. You can access it [here](https://ecomm-typescript-arav.vercel.app/).
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Product Browsing**: View a list of available products.
+- **Quantity Selection**: Adjust product quantity before adding to the cart.
+- **Add to Cart**: Add items to the cart with a button click.
+- **Remove from Cart**: Remove items from the cart when needed.
+- **Local Storage**: Automatically saves the cart status so that cart items persist between page reloads.
+- **Responsive Design**: Ensures a responsive design for all screen sizes.
+- **Accessibility**: Follows web accessibility guidelines to ensure a usable experience for all users.
 
-- Configure the top-level `parserOptions` property like this:
+## Tech Stack
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **Vite**: For fast development and bundling.
+- **React**: For building the user interface with reusable components.
+- **JavaScript**: The core language for the application logic.
+- **HTML & CSS**: For structuring and styling the application.
+- **ContexAPI**: For Navigation and passing data through components.
+- **Vitest**: For unit testing.
+- **React Testin Library**: For integration test and e2e test.
+  
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Deployment
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+Deployed on **Vercell** for fast and reliable hosting.
